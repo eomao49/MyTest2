@@ -20,16 +20,12 @@ class Student {
 
 final _rand = Random();
 
-String randomAsciiName() {
-  int len = 5 + _rand.nextInt(3);
-  StringBuffer sb = StringBuffer();
-  for (int i = 0; i < len; i++) {
-    bool upper = _rand.nextBool();
-    int code = upper ? (65 + _rand.nextInt(26)) : (97 + _rand.nextInt(26));
-    sb.writeCharCode(code);
-  }
-  return sb.toString();
-}
+final List<String> fixedNames = [
+  '김가온','이도윤','박서연','최하준','정지우',
+  '한서윤','조민준','윤서현','장예린','송주원'
+];
+
+String randomFixedKoreanName() => fixedNames[_rand.nextInt(fixedNames.length)];
 
 List<int> randomScores() => List.generate(subjectCount, (_) => _rand.nextInt(101));
 
@@ -56,7 +52,7 @@ void main() {
     print('유효한 학생 수를 입력해야 합니다.');
     return;
   }
-  final List<Student> students = List.generate(n, (_) => Student(randomAsciiName(), randomScores()));
+  final List<Student> students = List.generate(n, (_) => Student(randomFixedKoreanName(), randomScores()));
   print('\n정렬 기준을 선택하세요:');
   print('1) 이름  2) 평균  3) 과목1  4) 과목2  5) 과목3');
   stdout.write('번호 입력: ');
